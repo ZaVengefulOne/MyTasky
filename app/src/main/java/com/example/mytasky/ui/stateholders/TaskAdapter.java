@@ -1,4 +1,4 @@
-package com.example.mytasky;
+package com.example.mytasky.ui.stateholders;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+
+import com.example.mytasky.data.models.Task;
 
 import java.util.List;
 

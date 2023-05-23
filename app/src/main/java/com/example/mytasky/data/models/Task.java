@@ -1,4 +1,4 @@
-package com.example.mytasky;
+package com.example.mytasky.data.models;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 

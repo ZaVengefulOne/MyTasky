@@ -1,7 +1,4 @@
-package com.example.mytasky;
-
-import static android.content.Context.MODE_APPEND;
-import static android.content.Context.MODE_PRIVATE;
+package com.example.mytasky.ui.fragments;
 
 import androidx.fragment.app.Fragment;
 
@@ -19,6 +16,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 
+import com.example.mytasky.R;
+import com.example.mytasky.data.models.Task;
+import com.example.mytasky.ui.stateholders.TaskAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
@@ -27,7 +27,6 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class MenuFragment extends Fragment {
 

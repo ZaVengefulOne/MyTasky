@@ -1,4 +1,4 @@
-package com.example.mytasky;
+package com.example.mytasky.ui.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.example.mytasky.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +54,7 @@ public class HabitTrackerFragment extends Fragment {
             public void onClick(View v) {
                 requireActivity().getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
-                        .replace(R.id.fragment_container,MenuFragment.class, null)
+                        .replace(R.id.fragment_container, MenuFragment.class, null)
                         .commit();
             }
         });
