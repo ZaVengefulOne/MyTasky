@@ -1,7 +1,7 @@
 package com.example.mytasky.data.protocols;
 
 
-import com.example.mytasky.data.models.UsersLogin;
+import com.example.mytasky.data.database.entity.UsersLogin;
 
 public interface AccountsProtocol {
 

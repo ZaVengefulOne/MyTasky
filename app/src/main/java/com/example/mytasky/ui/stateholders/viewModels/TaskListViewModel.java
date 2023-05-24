@@ -1,4 +1,4 @@
 package com.example.mytasky.ui.stateholders.viewModels;
-
-public class TaskListViewModel {
+import androidx.lifecycle.ViewModel;
+public class TaskListViewModel extends ViewModel {
 }

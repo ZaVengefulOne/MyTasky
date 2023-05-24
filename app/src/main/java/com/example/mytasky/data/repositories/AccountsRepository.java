@@ -2,7 +2,7 @@ package com.example.mytasky.data.repositories;
 import android.content.Context;
 
 import com.example.mytasky.data.datasourse.AccountsDataSource;
-import com.example.mytasky.data.models.UsersLogin;
+import com.example.mytasky.data.database.entity.UsersLogin;
 import com.example.mytasky.data.protocols.AccountsProtocol;
 
 

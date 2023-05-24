@@ -1,4 +1,6 @@
 package com.example.mytasky.ui.stateholders.viewModels;
 
-public class MenuViewModel {
+import androidx.lifecycle.ViewModel;
+
+public class MenuViewModel extends ViewModel {
 }

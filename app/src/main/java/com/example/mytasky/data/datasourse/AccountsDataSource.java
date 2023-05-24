@@ -2,17 +2,41 @@ package com.example.mytasky.data.datasourse;
 
 import android.content.Context;
 
+import androidx.lifecycle.LiveData;
 import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
 
-import com.example.mytasky.data.models.UsersLogin;
+import com.example.mytasky.data.database.UsersDataBase;
+import com.example.mytasky.data.database.dao.UsersDao;
+import com.example.mytasky.data.database.entity.UsersLogin;
 import com.example.mytasky.data.workers.UserDataWorker;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AccountsDataSource {
     private final Context context;
     private final WorkManager workManager;
+    List<UsersLogin> users = new ArrayList<>();
+
+    public LiveData<List<UsersLogin>> getUsersList()
+    {
+
+        UsersDataBase db = UsersDataBase.getDatabase(context);
+        UsersDao usersDao = db.usersDao();
+        db.getQueryExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                for (UsersLogin usersLogin : users){
+                    usersDao.insert(usersLogin);
+                }
+            }
+        });
+        return UsersDao.getUsersList();
+    }
+
 
     public AccountsDataSource(Context context) {
         this.context = context;
@@ -24,6 +48,7 @@ public class AccountsDataSource {
         Databuilder.putString(UserDataWorker.KEY_LOG, login);
         return Databuilder.build();
     }
+
 
 
     public boolean checkLoginUserValid(UsersLogin loginUser){
