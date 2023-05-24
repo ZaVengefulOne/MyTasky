@@ -1,4 +1,4 @@
-package com.example.mytasky;
+package com.example.mytasky.ui.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,10 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.example.mytasky.R;
+import com.example.mytasky.data.models.Task;
+import com.example.mytasky.ui.stateholders.TaskAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
