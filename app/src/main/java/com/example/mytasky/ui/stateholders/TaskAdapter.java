@@ -10,17 +10,19 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.example.mytasky.data.models.Task;
+import com.example.mytasky.data.database.entity.TaskEntity;
+import com.example.mytasky.data.datasourse.TasksDataSource;
 
 import java.util.List;
 
-public class TaskAdapter extends ArrayAdapter<Task> {
+public class TaskAdapter extends ArrayAdapter<TaskEntity> {
 
     private Context context;
-    private List<Task> taskList;
+    private List<TaskEntity> taskList;
     public Button timeButton;
 
-    public TaskAdapter(Context context, List<Task> taskList) {
+
+    public TaskAdapter(Context context, List<TaskEntity> taskList) {
         super(context, 0, taskList);
         this.context = context;
         this.taskList = taskList;
@@ -34,8 +36,8 @@ public class TaskAdapter extends ArrayAdapter<Task> {
             itemView = LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_1, parent, false);
 //            timeButton = LayoutInflater.from(context).inflate(android.R.layout.)
         }
-
-        Task currentTask = taskList.get(position);
+        TasksDataSource tasksDataSource = TasksDataSource.getInstance(getContext());
+        TaskEntity currentTask = taskList.get(position);
 
         TextView textViewTask = itemView.findViewById(android.R.id.text1);
         textViewTask.setText(currentTask.getTaskText());
@@ -43,6 +45,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
             @Override
             public void onClick(View v) {
                 taskList.remove(position);
+                tasksDataSource.deleteTask(position);
                 notifyDataSetChanged();
             }
         });

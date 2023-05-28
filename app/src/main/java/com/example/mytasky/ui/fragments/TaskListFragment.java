@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mytasky.R;
+import com.example.mytasky.data.database.entity.TaskEntity;
 import com.example.mytasky.data.models.Task;
 import com.example.mytasky.ui.stateholders.TaskAdapter;
 
@@ -21,7 +22,7 @@ public class TaskListFragment extends Fragment {
 
     private ListView listViewTasks;
     private TaskAdapter taskAdapter;
-    private List<Task> taskList;
+    private List<TaskEntity> taskList;
 
     @Nullable
     @Override

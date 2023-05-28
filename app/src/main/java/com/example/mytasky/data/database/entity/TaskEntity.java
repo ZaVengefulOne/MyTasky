@@ -1,17 +1,29 @@
-package com.example.mytasky.data.models;
+package com.example.mytasky.data.database.entity;
+
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-public class Task {
-    private String taskText;
-    private CalendarDay date;
+@Entity(tableName = "tasks_table")
+public class TaskEntity {
 
-    private LocalDateTime expirationDate;
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "id")
+    public Integer uid;
+    public String taskText;
 
-    public Task(String taskText, CalendarDay date, LocalDateTime expirationDate) {
+    public CalendarDay date;
+
+    public LocalDateTime expirationDate;
+
+    public TaskEntity(String taskText, CalendarDay date, LocalDateTime expirationDate) {
         this.taskText = taskText;
         this.date = date;
         this.expirationDate = expirationDate;
