@@ -156,6 +156,7 @@ public class MenuFragment extends Fragment {
                             .addToBackStack(null)
                             .replace(R.id.fragment_container, HabitTrackerFragment.class, null)
                             .commit();
+//                    Navigation.findNavController(v).navigate(R.id.action_menu_to_habits);
                 }
             });
         }

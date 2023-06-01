@@ -3,4 +3,7 @@
     <string name="enter_a_task">Enter a task</string>
     <string name="add_task">Add Task</string>
     <string name="habits">Habits</string>
+    <string name="add_habit">Add habit</string>
+    <string name="home">Home</string>
+    <string name="enter_new_habit_here">Enter new habit here</string>
 </resources>
