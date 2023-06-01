@@ -1,5 +1,6 @@
 package com.example.mytasky.ui.fragments;
 
+
 import androidx.fragment.app.Fragment;
 
 import android.content.Context;
@@ -18,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 
 import com.example.mytasky.R;
@@ -25,7 +27,9 @@ import com.example.mytasky.data.database.TasksDataBase;
 import com.example.mytasky.data.database.entity.TaskEntity;
 import com.example.mytasky.data.datasourse.TasksDataSource;
 import com.example.mytasky.data.models.Task;
+import com.example.mytasky.databinding.FragmentMenuBinding;
 import com.example.mytasky.ui.stateholders.TaskAdapter;
+import com.example.mytasky.ui.stateholders.TaskRecycler;
 import com.example.mytasky.ui.stateholders.viewModels.MenuViewModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -48,6 +52,14 @@ public class MenuFragment extends Fragment {
     private TaskAdapter taskAdapter;
     private List<TaskEntity> taskList;
     private MenuViewModel model;
+    private FragmentMenuBinding binding;
+    private TaskRecycler adapter;
+
+    public MenuFragment()
+    {
+        super(R.layout.fragment_menu);
+    }
+
     private void saveData() {
 //        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("TaskManagerPrefs",MODE_PRIVATE);
 //        SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -67,57 +79,74 @@ public class MenuFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_menu, container, false);
-        editTextTask = rootView.findViewById(R.id.editTextTask);
-        buttonAddTask = rootView.findViewById(R.id.buttonAddTask);
-        buttonHabit = rootView.findViewById(R.id.habit);
+        binding = FragmentMenuBinding.inflate(getLayoutInflater());
+        editTextTask = binding.editTextTask;
+        buttonAddTask = binding.buttonAddTask;
+        buttonHabit = binding.habit;
+        taskList = new ArrayList<>();
+        adapter = new TaskRecycler(taskList);
+        binding.RecyclerTasks.setAdapter(adapter);
+        binding.RecyclerTasks.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         loadData();
-        listViewTasks = rootView.findViewById(R.id.listViewTasks);
-        TimePicker timePicker = rootView.findViewById(R.id.timePicker);
+        return binding.getRoot();
+    }
+
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            MaterialCalendarView calendarView = binding.calendarView;
+            TimePicker timePicker = binding.timePicker;
             int hour = timePicker.getHour();
             int minute = timePicker.getMinute();
             // Создаем экземпляр LocalTime с использованием выбранного времени
-            LocalTime localTime = null;
-            localTime = LocalTime.of(hour, minute);
+            LocalTime localTime = LocalTime.of(hour, minute);
             LocalDate localDate = LocalDate.now();
             LocalDateTime localDateTime = LocalDateTime.of(localDate, localTime);
-            MaterialCalendarView calendarView = rootView.findViewById(R.id.calendarView);
-            taskAdapter = new TaskAdapter(requireContext(), taskList);
-            listViewTasks.setAdapter(taskAdapter);
+            TasksDataSource tasksDataSource = TasksDataSource.getInstance(getContext());
             model = new ViewModelProvider(this).get(MenuViewModel.class);
+            model.listLiveData.observe(getViewLifecycleOwner(), new Observer<List<TaskEntity>>()
+                    {
 
-            buttonAddTask.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String taskText = editTextTask.getText().toString().trim();
-                    if (!taskText.isEmpty()) {
-                        CalendarDay selectedDate = calendarView.getSelectedDate();
-                        // Создаем экземпляр TaskEntity на основе Task
-                        TaskEntity taskEntity = new TaskEntity(taskText, selectedDate, localDateTime);
+                        @Override
+                        public void onChanged(List<TaskEntity> taskList) {
+//                            adapter.setData(taskEntities);
 
-                        // Получаем экземпляр TasksDataSource из TasksDataBase
-                        TasksDataSource tasksDataSource = TasksDataSource.getInstance(getContext());
-
-                        // Вызываем метод addTask() на экземпляре TasksDataSource, передавая в него экземпляр TaskEntity
-                        tasksDataSource.addTask(taskEntity);
-                        taskList.add(taskEntity);
-                        taskAdapter.notifyDataSetChanged();
-                        editTextTask.setText("");
-                        model.listLiveData.observe(getViewLifecycleOwner(), new Observer<List<TaskEntity>>()
-                                {
-                                    @Override
-                                    public void onChanged(List<TaskEntity> taskEntities) {
-                                        TaskAdapter adapter = new TaskAdapter(requireContext(), taskEntities);
-                                        listViewTasks.setAdapter(adapter);
+                            adapter.onTaskListClickListener = new TaskRecycler.OnTaskListClickListener() {
+                                @Override
+                                public void OnTaskItemListClickListener(int position) {
+                                    tasksDataSource.deleteTask(position);
+                                    taskList.remove(position);
+                                    adapter.notifyDataSetChanged();
+                                }
+                            };
+                            buttonAddTask.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    String taskText = editTextTask.getText().toString().trim();
+                                    if (!taskText.isEmpty()) {
+                                        CalendarDay selectedDate = calendarView.getSelectedDate();
+                                        // Создаем экземпляр TaskEntity на основе Task
+                                        TaskEntity taskEntity = new TaskEntity(taskText, selectedDate, localDateTime);
+                                        // Получаем экземпляр TasksDataSource из TasksDataBase
+                                        // Вызываем метод addTask() на экземпляре TasksDataSource, передавая в него экземпляр TaskEntity
+                                        tasksDataSource.addTask(taskEntity);
+                                        taskList.add(taskEntity);
+                                        adapter.notifyDataSetChanged();
+                                        editTextTask.setText("");
+                                    } else {
+                                        Toast.makeText(getActivity(), "Please enter a task", Toast.LENGTH_SHORT).show();
                                     }
                                 }
-                        );
-                    } else {
-                        Toast.makeText(getActivity(), "Please enter a task", Toast.LENGTH_SHORT).show();
+                            });
+
+                        }
                     }
-                }
-            });
+            );
+
+
+
+
 
             buttonHabit.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -130,9 +159,7 @@ public class MenuFragment extends Fragment {
                 }
             });
         }
-        return rootView;
     }
-
 
 
     private void loadData() {

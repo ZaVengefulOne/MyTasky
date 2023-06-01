@@ -1,22 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingTop="12dp"
     android:paddingRight="16dp"
     android:paddingBottom="16dp"
-    tools:context=".ui.MainActivity">
+    android:id="@+id/fragment_menu"
+    tools:context=".ui.fragments.MenuFragment">
 
     <EditText
         android:id="@+id/editTextTask"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="480dp"
+        android:layout_height="48dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:hint="Enter a task" />
+        android:hint="@string/enter_a_task"
+        android:autofillHints="Task"
+        android:inputType="text" />
 
     <Button
         android:id="@+id/buttonAddTask"
@@ -27,7 +30,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
-        android:text="Add Task" />
+        android:text="@string/add_task" />
 
     <com.prolificinteractive.materialcalendarview.MaterialCalendarView
         android:id="@+id/calendarView"
@@ -39,44 +42,37 @@
 
     <TimePicker
         android:id="@+id/timePicker"
-        android:layout_width="192dp"
-        android:layout_height="201dp"
-        android:layout_above="@+id/listViewTasks"
+        android:layout_width="157dp"
+        android:layout_height="212dp"
         android:layout_below="@+id/habit"
-        android:layout_alignParentEnd="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="-9dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="7dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="1dp"
         android:layout_toEndOf="@+id/calendarView" />
 
-    <ListView
-        android:id="@+id/listViewTasks"
-        android:layout_width="365dp"
-        android:layout_height="206dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RecyclerTasks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/calendarView"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp">
-
-    </ListView>
+        android:layout_marginStart="-4dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="163dp"/>
 
     <Button
         android:id="@+id/habit"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/editTextTask"
-        android:layout_alignParentEnd="true"
         android:layout_marginStart="28dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:layout_toEndOf="@+id/buttonAddTask"
-        android:text="Habits" />
+        android:text="@string/habits" />
 
 </RelativeLayout>
+</layout>

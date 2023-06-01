@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer;
 import com.example.mytasky.data.database.TasksDataBase;
 import com.example.mytasky.data.database.dao.TasksDao;
 import com.example.mytasky.data.database.entity.TaskEntity;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +44,7 @@ public class TasksDataSource {
     }
 
     public static LiveData<List<TaskEntity>> getTasks() {
+        tasks.add(new TaskEntity("123", CalendarDay.today(), null));
         TasksDataBase db = TasksDataBase.getDatabase(context);
         TasksDao tasksDao = db.tasksDao();
         LiveData<List<TaskEntity>> listLiveData = tasksDao.getTasks();

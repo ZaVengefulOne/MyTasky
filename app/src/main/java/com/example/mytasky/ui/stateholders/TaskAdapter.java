@@ -2,13 +2,16 @@ package com.example.mytasky.ui.stateholders;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mytasky.data.database.entity.TaskEntity;
 import com.example.mytasky.data.datasourse.TasksDataSource;
@@ -19,7 +22,6 @@ public class TaskAdapter extends ArrayAdapter<TaskEntity> {
 
     private Context context;
     private List<TaskEntity> taskList;
-    public Button timeButton;
 
 
     public TaskAdapter(Context context, List<TaskEntity> taskList) {
@@ -51,4 +53,25 @@ public class TaskAdapter extends ArrayAdapter<TaskEntity> {
         });
         return itemView;
     }
+//    @NonNull
+//    @Override
+//    public TaskViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//        return new TaskViewHolder(ItemTaskListBinding.inflate(
+//                LayoutInflater.from(parent.getContext()),
+//                parent,
+//                false
+//        ));
+//    }
+//
+//    @Override
+//    public void onBindViewHolder(@NonNull TaskAdapter.TaskViewHolder holder, int position) {
+//        TaskEntity task = taskList.get(position);
+//        holder.b
+//    }
+
+//    @Override
+//    public int getItemCount() {
+//        return 0;
+//    }
+//
 }
