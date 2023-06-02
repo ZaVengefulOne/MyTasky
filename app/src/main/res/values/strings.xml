@@ -6,4 +6,8 @@
     <string name="add_habit">Add habit</string>
     <string name="home">Home</string>
     <string name="enter_new_habit_here">Enter new habit here</string>
+    <string name="add">Add</string>
+    <string name="com.example.mytasky.SHAREDTASKS">Add</string>
+    <string name="com.example.mytasky.SHAREDHABITS">Add</string>
+    <string name="mytasky">MyTasky</string>
 </resources>

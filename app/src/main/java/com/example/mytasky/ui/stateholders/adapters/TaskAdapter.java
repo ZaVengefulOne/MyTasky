@@ -1,4 +1,4 @@
-package com.example.mytasky.ui.stateholders;
+package com.example.mytasky.ui.stateholders.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

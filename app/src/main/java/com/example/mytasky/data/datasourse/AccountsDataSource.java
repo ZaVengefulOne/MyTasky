@@ -55,29 +55,15 @@ public class AccountsDataSource {
         OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(UserDataWorker.class)
                 .setInputData(createInputData(loginUser.getLogin())).build();
         workManager.enqueue(workRequest);
-        return loginUser.getLogin().equals("") &&
-                loginUser.getPassword().equals("");
+        return loginUser.getLogin().equals("Alex") &&
+                loginUser.getPassword().equals("Alex123456");
     }
 
+    public boolean checkAdminUserValid(UsersLogin loginAdministrator){
+        return loginAdministrator.getLogin().equals("admin") &&
+                loginAdministrator.getPassword().equals("admin");
+    }
 }
 
 
-//    public boolean checkAdminUserValid(LoginAdministrator loginAdministrator, boolean allowed){
-//        if (allowed) {
-//            String filename = "Key";
-//            String fileContents = loginAdministrator.getPasskey();
-//            File file_key = new File("/storage/emulated/0/Android/data", filename);
-//            try {
-//                FileOutputStream fos = new FileOutputStream(file_key);
-//                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fos));
-//                writer.write(fileContents);
-//                writer.close();
-//                fos.close();
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
-//        return !loginAdministrator.getAdmlogin().equals("") &&
-//                !loginAdministrator.getPasskey().equals("");
-//    }
-//}
+

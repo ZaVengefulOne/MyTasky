@@ -20,4 +20,8 @@ public class AccountsRepository implements AccountsProtocol {
     public boolean userLogin(UsersLogin loginUser) {
         return dataSource.checkLoginUserValid(loginUser);
     }
+
+    public boolean adminLogin(UsersLogin loginUser){
+        return dataSource.checkAdminUserValid(loginUser);
+    }
 }

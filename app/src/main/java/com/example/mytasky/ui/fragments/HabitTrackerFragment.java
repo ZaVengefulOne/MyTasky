@@ -37,7 +37,7 @@ public class HabitTrackerFragment extends Fragment {
 
     private void saveData() {
         SharedPreferences sharedPrefWrite =
-                requireActivity().getPreferences(Context.MODE_PRIVATE);
+                requireActivity().getSharedPreferences(getString(R.string.com_example_mytasky_SHAREDHABITS), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPrefWrite.edit();
         Gson gson = new Gson();
         String habitsjson = gson.toJson(habits);
@@ -47,7 +47,7 @@ public class HabitTrackerFragment extends Fragment {
 
     private void loadData() {
         SharedPreferences sharedPrefRead =
-                requireActivity().getPreferences(Context.MODE_PRIVATE);
+                requireActivity().getSharedPreferences(getString(R.string.com_example_mytasky_SHAREDHABITS), Context.MODE_PRIVATE);
         String habitsjson = sharedPrefRead.getString("habits", null);
         if (habitsjson != null) {
             Gson gson = new Gson();
