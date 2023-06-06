@@ -72,6 +72,7 @@ private List<TaskEntity> taskList = new ArrayList<>();
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             TasksDataSource tasksDataSource = TasksDataSource.getInstance(getContext());
 //            MenuViewModel model = new ViewModelProvider(this).get(MenuViewModel.class);
+//           bla
             adapter.onTaskListClickListener = new TaskRecycler.OnTaskListClickListener() {
                 @Override
                 public void OnTaskItemListClickListener(int position) {
