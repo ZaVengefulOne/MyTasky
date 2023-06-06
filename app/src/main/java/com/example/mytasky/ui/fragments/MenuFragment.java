@@ -61,7 +61,6 @@ private List<TaskEntity> taskList = new ArrayList<>();
         loadData();
         buttonAddTask = binding.addTaskButton;
         buttonHabit = binding.habitButton;
-//        bla-bla-bla
         adapter = new TaskRecycler(taskList);
         binding.RecyclerTasks.setAdapter(adapter);
         binding.RecyclerTasks.setLayoutManager(new LinearLayoutManager(getActivity()));
