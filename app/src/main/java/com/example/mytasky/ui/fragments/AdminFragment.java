@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mytasky.R;
@@ -22,10 +23,10 @@ public class AdminFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentAdminBinding.inflate(inflater,container,false);
-        String[] data = {"Alex", "Vengeful", "Nakarat"};
+        String[] data = {"Alex", "Vengeful", "Nakarat", "Korpalo", "Roman", "Lena", "Plusha"};
         AdminAdapter adapter = new AdminAdapter(data);
         binding.AdminRecycler.setAdapter(adapter);
-        binding.executePendingBindings();
+        binding.AdminRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         return binding.getRoot();
     }
 
